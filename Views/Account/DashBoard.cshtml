@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Customer Dashboard";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <h2>
+                Welcome, @(Session["FullName"] ?? "Customer")!
+            </h2>
+
+            <p class="text-muted">
+                You are successfully logged in to HomeEase.
+            </p>
+
+            <hr />
+
+            <h5>Customer Dashboard</h5>
+            <p>
+                Your bookings, saved addresses and profile
+                will be available here as we build the next features.
+            </p>
+
+            @using (Html.BeginForm("Logout", "Account",
+                FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="btn btn-outline-danger">
+                    Logout
+                </button>
+            }
+
+            <hr class="my-4" />
+
+            <div class="mt-4">
+                <h3>Explore Home Services</h3>
+                <p class="text-muted">
+                    Find the right service for your home and book it easily.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    @Html.ActionLink(
+                        "Browse All Services",
+                        "Index",
+                        "Services",
+                        null,
+                        new { @class = "btn btn-primary" })
+
+                    @Html.ActionLink(
+                        "View My Profile",
+                        "Profile",
+                        "Account",
+                        null,
+                        new { @class = "btn btn-outline-primary" })
+
+                    @Html.ActionLink(
+                        "Manage Addresses",
+                        "Addresses",
+                        "Account",
+                        null,
+                        new { @class = "btn btn-outline-primary" })
+
+                    @Html.ActionLink(
+                        "My Bookings",
+                        "MyBookings",
+                        "Bookings",
+                        null,
+                        new { @class = "btn btn-outline-primary" })
+                </div>
+               
+            </div>
+
+
+            @Html.ActionLink(
+            "My Profile",
+             "Profile",
+            "Account",
+            null,
+            new { @class = "btn btn-primary" })
+
+            @Html.ActionLink(
+                "My Addresses",
+                "Addresses",
+                "Account",
+                null,
+                new { @class = "btn btn-outline-primary ms-2" })
+        </div>
+    </div>
+</div>

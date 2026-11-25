@@ -1,0 +1,59 @@
+﻿
+@model HomeEase.Models.AdminStaffViewModel
+
+@{
+    ViewBag.Title = "Add Staff";
+}
+
+<div class="container py-5" style="max-width: 750px;">
+    <h2 class="mb-4">Add Staff Member</h2>
+
+    @using (Html.BeginForm("CreateStaff", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false, "", new { @class = "text-danger mb-3" })
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.FullName, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Phone, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            <small class="text-muted">Minimum 8 characters.</small>
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Skills, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Skills, new { @class = "form-control", placeholder = "Cleaning, Plumbing..." })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(m => m.ExperienceYears, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.ExperienceYears, new { @class = "form-control", type = "number", min = "0", max = "50" })
+            @Html.ValidationMessageFor(m => m.ExperienceYears, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-check mb-4">
+            @Html.CheckBoxFor(m => m.IsAvailable, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.IsAvailable, "Available for bookings", new { @class = "form-check-label" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Staff</button>
+        @Html.ActionLink("Cancel", "ManageStaff", "Admin", null, new { @class = "btn btn-outline-secondary ms-2" })
+    }
+</div>

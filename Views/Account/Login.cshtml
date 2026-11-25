@@ -1,0 +1,107 @@
+﻿
+@model HomeEase.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in | HomeEase";
+}
+
+<main class="auth-wrap">
+    <section class="auth-card">
+
+        <div class="auth-symbol">
+            <i class="bi bi-house-heart"></i>
+        </div>
+
+        <p class="eyebrow text-center">WELCOME BACK</p>
+
+        <h1>Log in to HomeEase</h1>
+
+        <p class="auth-subtitle">
+            Manage your home services in one place.
+        </p>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(
+                false,
+                "",
+                new { @class = "alert alert-danger" }
+            )
+
+            <div class="mb-3">
+                @Html.LabelFor(
+                    m => m.Email,
+                    "Email address",
+                    new { @class = "form-label" }
+                )
+
+                @Html.TextBoxFor(
+                    m => m.Email,
+                    new
+                    {
+                        @class = "form-control",
+                        type = "email",
+                        autocomplete = "email",
+                        placeholder = "you@example.com"
+                    }
+                )
+
+                @Html.ValidationMessageFor(
+                    m => m.Email,
+                    "",
+                    new { @class = "text-danger small" }
+                )
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(
+                    m => m.Password,
+                    "Password",
+                    new { @class = "form-label" }
+                )
+
+                @Html.PasswordFor(
+                    m => m.Password,
+                    new
+                    {
+                        @class = "form-control",
+                        autocomplete = "current-password",
+                        placeholder = "Enter your password"
+                    }
+                )
+
+                @Html.ValidationMessageFor(
+                    m => m.Password,
+                    "",
+                    new { @class = "text-danger small" }
+                )
+            </div>
+
+            <div class="text-end mb-3">
+                <span class="small text-muted">
+                    Forgot password? Reset option coming soon.
+                </span>
+            </div>
+
+            <button class="btn btn-brand w-100 py-2" type="submit">
+                Log in
+                <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        }
+
+        <p class="auth-switch">
+            Don't have an account?
+            @Html.ActionLink("Create account", "Register", "Account")
+        </p>
+
+    </section>
+</main>

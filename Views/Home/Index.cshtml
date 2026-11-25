@@ -1,0 +1,430 @@
+﻿
+@{
+    ViewBag.Title = "HomeEase | Home services, made easy";
+}
+
+<main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="home">
+        <div class="hero-orb orb-one"></div>
+        <div class="hero-orb orb-two"></div>
+
+        <div class="container position-relative">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-6 hero-copy">
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        YOUR HOME, IN GOOD HANDS
+                    </div>
+
+                    <h1>
+                        More time for life.<br />
+                        <span>Less time on chores.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Trusted professionals for the little things that make a
+                        house feel like home. Book your next home service in minutes.
+                    </p>
+
+                    <div class="hero-buttons d-flex flex-wrap gap-3">
+                        <a href="#services" class="btn btn-brand btn-lg">
+                            Explore services
+                            <i class="bi bi-arrow-up-right ms-2"></i>
+                        </a>
+
+                        <a href="#how-it-works" class="btn btn-outline-brand btn-lg">
+                            <i class="bi bi-play-circle me-2"></i>
+                            How it works
+                        </a>
+                    </div>
+
+                    <div class="hero-trust">
+                        <div class="avatar-stack" aria-hidden="true">
+                            <span>AK</span>
+                            <span>RS</span>
+                            <span>MP</span>
+                            <span><i class="bi bi-plus"></i></span>
+                        </div>
+
+                        <div>
+                            <div class="trust-stars">
+                                ★★★★★ <strong>4.9/5</strong>
+                            </div>
+                            <small>Loved by 2,000+ happy homes</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="hero-visual">
+                        <img class="hero-photo"
+                             src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85"
+                             alt="Professional cleaning a bright, modern home" />
+
+                        <div class="photo-shade"></div>
+
+                        <div class="floating-card booking-card">
+                            <div class="floating-icon">
+                                <i class="bi bi-check2-circle"></i>
+                            </div>
+                            <div>
+                                <strong>Booking confirmed!</strong>
+                                <small>Your home refresh is on its way.</small>
+                            </div>
+                        </div>
+
+                        <div class="floating-card rating-card">
+                            <div class="rating-badge">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <div>
+                                <strong>Top-rated pros</strong>
+                                <small>Verified &amp; reviewed</small>
+                            </div>
+                        </div>
+
+                        <div class="hero-caption">
+                            <span class="caption-line"></span>
+                            <span>Care for every corner.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-stats row g-3 mt-5">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <strong>2k+</strong>
+                        <span>Happy customers</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <strong>50+</strong>
+                        <span>Skilled professionals</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <strong>15+</strong>
+                        <span>Home services</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <strong>4.9/5</strong>
+                        <span>Customer rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section-pad services-section" id="services">
+        <div class="container">
+            <div class="section-heading d-flex flex-column flex-md-row
+                        align-items-md-end justify-content-between gap-3">
+                <div>
+                    <div class="eyebrow">WHAT WE CAN HELP WITH</div>
+                    <h2>
+                        Care for your home,<br />
+                        <span>all in one place.</span>
+                    </h2>
+                </div>
+                <p>
+                    From quick fixes to a full-home refresh, find the right help
+                    for your to-do list.
+                </p>
+            </div>
+
+            <div class="row g-4 mt-2" id="serviceGrid">
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+                                 alt="Home cleaning service" />
+                            <span class="service-tag">Most booked</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon"><i class="bi bi-stars"></i></div>
+                            <h3>Home Cleaning</h3>
+                            <p>A fresh, spotless space without the stress.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹799</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore Home Cleaning">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80"
+                                 alt="Bright kitchen" />
+                            <span class="service-tag tag-soft">Deep clean</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon"><i class="bi bi-droplet-half"></i></div>
+                            <h3>Kitchen &amp; Bathroom</h3>
+                            <p>Detailed cleaning for the hardest-working rooms.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹599</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore Kitchen and Bathroom">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=80"
+                                 alt="Electrician working on a repair" />
+                            <span class="service-tag tag-blue">Quick fix</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+                            <h3>Electrical Services</h3>
+                            <p>Small repairs and installations, handled safely.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹299</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore Electrical Services">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=800&q=80"
+                                 alt="Plumbing tools" />
+                            <span class="service-tag tag-blue">On demand</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="bi bi-wrench-adjustable"></i>
+                            </div>
+                            <h3>Plumbing</h3>
+                            <p>Leaks, fittings and everyday plumbing fixes.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹349</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore Plumbing">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80"
+                                 alt="Laundry and folded clothes" />
+                            <span class="service-tag tag-soft">Easy living</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon"><i class="bi bi-basket2"></i></div>
+                            <h3>Laundry &amp; Ironing</h3>
+                            <p>Fresh clothes, neatly folded and ready to go.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹199</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore Laundry and Ironing">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-sm-6 col-lg-4">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80"
+                                 alt="Comfortable home interior" />
+                            <span class="service-tag tag-blue">Home care</span>
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon"><i class="bi bi-house-gear"></i></div>
+                            <h3>AC &amp; Appliance Care</h3>
+                            <p>Keep your home essentials running smoothly.</p>
+                            <div class="service-bottom">
+                                <span>Starting at <strong>₹399</strong></span>
+                                <a href="@Url.Action("Index", "Services")"
+                                   class="service-link" aria-label="Explore AC and Appliance Care">
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="@Url.Action("Index", "Services")"
+                   class="btn btn-outline-brand px-4">
+                    Explore all services
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section-pad process-section" id="how-it-works">
+        <div class="container">
+            <div class="section-heading text-center mx-auto">
+                <div class="eyebrow justify-content-center">
+                    SIMPLE FROM START TO FINISH
+                </div>
+                <h2>Home help in <span>three easy steps.</span></h2>
+                <p>Less planning. Less hassle. More time for what matters.</p>
+            </div>
+
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-icon"><i class="bi bi-search"></i></div>
+                        <h3>Choose your service</h3>
+                        <p>Browse trusted services and find the right fit for your home.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-icon"><i class="bi bi-calendar2-check"></i></div>
+                        <h3>Pick a time</h3>
+                        <p>Choose a convenient date and time that works for you.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div class="step-icon"><i class="bi bi-house-check"></i></div>
+                        <h3>Relax, we've got it</h3>
+                        <p>Your service professional takes care of the rest.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS -->
+    <section class="section-pad review-section" id="reviews">
+        <div class="container">
+            <div class="section-heading d-flex flex-column flex-md-row
+                        justify-content-between align-items-md-end gap-3">
+                <div>
+                    <div class="eyebrow">KIND WORDS, REAL HOMES</div>
+                    <h2>Don't just take <span>our word for it.</span></h2>
+                </div>
+                <div class="overall-rating">
+                    <strong>4.9</strong>
+                    <div>
+                        <div class="trust-stars">★★★★★</div>
+                        <small>Based on 1,200+ reviews</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-md-4">
+                    <article class="review-card">
+                        <div class="trust-stars mb-3">★★★★★</div>
+                        <p>
+                            “Booking was simple, the cleaner arrived on time,
+                            and my apartment looked amazing. I'll definitely book again.”
+                        </p>
+                        <div class="review-person">
+                            <div class="person-avatar avatar-peach">NK</div>
+                            <div>
+                                <strong>Neha Kapoor</strong>
+                                <small>Home cleaning customer</small>
+                            </div>
+                            <i class="bi bi-patch-check-fill ms-auto verified-icon"></i>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-4">
+                    <article class="review-card featured-review">
+                        <div class="trust-stars mb-3">★★★★★</div>
+                        <p>
+                            “Finally, a reliable way to get small repairs done.
+                            The process was smooth and the professional was courteous.”
+                        </p>
+                        <div class="review-person">
+                            <div class="person-avatar avatar-green">AM</div>
+                            <div>
+                                <strong>Arjun Mehta</strong>
+                                <small>Plumbing customer</small>
+                            </div>
+                            <i class="bi bi-patch-check-fill ms-auto verified-icon"></i>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-4">
+                    <article class="review-card">
+                        <div class="trust-stars mb-3">★★★★★</div>
+                        <p>
+                            “Loved being able to choose a time that suited me.
+                            Great service, clear pricing and no last-minute surprises.”
+                        </p>
+                        <div class="review-person">
+                            <div class="person-avatar avatar-blue">PS</div>
+                            <div>
+                                <strong>Priya Sharma</strong>
+                                <small>Electrical service customer</small>
+                            </div>
+                            <i class="bi bi-patch-check-fill ms-auto verified-icon"></i>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-panel">
+                <div>
+                    <div class="eyebrow eyebrow-light">
+                        A LITTLE MORE ROOM TO BREATHE
+                    </div>
+                    <h2>Your to-do list can<br />wait. <span>Life can't.</span></h2>
+                    <p>Make home care the easiest part of your week.</p>
+                </div>
+
+                <a href="@Url.Action("Index", "Services")"
+                   class="btn btn-light btn-lg cta-button">
+                    Find your service
+                    <i class="bi bi-arrow-up-right ms-2"></i>
+                </a>
+
+                <div class="cta-decoration">
+                    <i class="bi bi-house-heart"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

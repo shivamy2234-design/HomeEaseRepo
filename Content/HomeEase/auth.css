@@ -1,0 +1,130 @@
+body.auth-page {
+    background: #f6f7fb;
+    min-height: 100vh
+}
+
+.auth-wrap {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 42px 16px
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 470px;
+    background: #fff;
+    border: 1px solid #e9eaf1;
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 18px 55px rgba(29,35,66,.08)
+}
+
+.auth-symbol {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: #f0edff;
+    color: #6554c0;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    margin: 0 auto 18px
+}
+
+.auth-card h1 {
+    text-align: center;
+    font-size: clamp(1.65rem,4vw,2rem);
+    font-weight: 750;
+    letter-spacing: -.04em;
+    margin-bottom: 8px
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #74788a;
+    margin-bottom: 25px
+}
+
+.auth-card .form-label {
+    font-weight: 600;
+    font-size: .92rem
+}
+
+.auth-card .form-control {
+    border-radius: 11px;
+    padding: 12px 13px;
+    border-color: #dfe1ea
+}
+
+    .auth-card .form-control:focus {
+        border-color: #8172dc;
+        box-shadow: 0 0 0 .2rem rgba(101,84,192,.12)
+    }
+
+.auth-switch {
+    text-align: center;
+    margin: 22px 0 12px;
+    color: #666b7a
+}
+
+    .auth-switch a {
+        font-weight: 700;
+        color: #6554c0;
+        text-decoration: none
+    }
+
+.demo-note {
+    font-size: .78rem;
+    color: #85899a;
+    text-align: center;
+    margin: 0;
+    line-height: 1.55
+}
+
+.auth-card .btn-brand {
+    border-radius: 11px
+}
+
+.auth-card .eyebrow {
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    color: #6554c0;
+    margin-bottom: 8px
+}
+
+@media(max-width:480px) {
+    .auth-card {
+        padding: 25px 20px;
+        border-radius: 17px
+    }
+}
+
+/* Login page background and centered form */
+.auth-wrap {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+/* Compact login card */
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 36px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(20, 30, 60, 0.10);
+}
+
+/* Responsive spacing for mobile */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 24px 20px;
+    }
+}

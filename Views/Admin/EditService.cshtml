@@ -1,0 +1,105 @@
+﻿@model HomeEase.Models.AdminServiceViewModel
+
+@{
+    ViewBag.Title = "Edit Service";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Edit Service</h3>
+                </div>
+
+                <div class="card-body">
+                    @using (Html.BeginForm("EditService", "Admin",
+                        FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.ServiceId)
+
+                        @Html.ValidationSummary(false, "",
+                            new { @class = "text-danger mb-3" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.ServiceName,
+                                new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.ServiceName,
+                                new { @class = "form-control", maxlength = "100" })
+                            @Html.ValidationMessageFor(m => m.ServiceName,
+                                "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Category,
+                                new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Category,
+                                new { @class = "form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.Category,
+                                "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Description,
+                                new { @class = "form-label" })
+                            @Html.TextAreaFor(m => m.Description,
+                                new
+                                     {
+                                         @class = "form-control",
+                                         rows = "3",
+                                    maxlength = "500"
+                                     })
+                            @Html.ValidationMessageFor(m => m.Description,
+                                "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Price,
+                                new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Price,
+                                new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                    min = "0.01",
+                                         step = "0.01"
+                                     })
+                            @Html.ValidationMessageFor(m => m.Price,
+                                "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.DurationMinutes,
+                                new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.DurationMinutes,
+                                new
+                                     {
+                                         @class = "form-control",
+                                         type = "number",
+                                    min = "1",
+                                         max = "1440"
+                                     })
+                            @Html.ValidationMessageFor(m => m.DurationMinutes,
+                                "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-check mb-4">
+                            @Html.CheckBoxFor(m => m.IsActive,
+                                new { @class = "form-check-input" })
+                            @Html.LabelFor(m => m.IsActive,
+                                new { @class = "form-check-label" })
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Update Service
+                        </button>
+
+                        @Html.ActionLink("Cancel", "ManageServices", "Admin",
+                            null, new { @class = "btn btn-outline-secondary ms-2" })
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

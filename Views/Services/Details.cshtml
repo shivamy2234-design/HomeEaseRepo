@@ -1,0 +1,214 @@
+﻿
+@model HomeEase.Models.ServiceViewModel
+
+@{
+    ViewBag.Title = Model.ServiceName + " | HomeEase";
+
+    string description = string.IsNullOrWhiteSpace(Model.Description)
+        ? "Our professional team helps keep your home comfortable, clean and well maintained."
+        : Model.Description;
+
+    int hours = Model.DurationMinutes / 60;
+    int minutes = Model.DurationMinutes % 60;
+
+    string duration = hours > 0
+        ? hours + (hours == 1 ? " hour" : " hours")
+        : "";
+
+    if (minutes > 0)
+    {
+        duration += (duration.Length > 0 ? " " : "")
+            + minutes + " minutes";
+    }
+}
+
+<main class="page-main">
+
+    <section class="page-hero">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Services", "Index", "Services")
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        @Model.ServiceName
+                    </li>
+                </ol>
+            </nav>
+
+            <div class="eyebrow">HOME SERVICES, MADE EASY</div>
+            <h1>@Model.ServiceName</h1>
+            <p class="page-intro">
+                Explore the service, what's included and estimated pricing.
+            </p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row g-4 g-lg-5">
+
+            <div class="col-lg-7">
+                <div class="detail-photo-wrap">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=85"
+                         alt="@Model.ServiceName"
+                         class="detail-photo" />
+
+                    <span class="detail-photo-label">
+                        <i class="bi bi-patch-check-fill me-2"></i>
+                        Professional home care
+                    </span>
+                </div>
+
+                <div class="detail-section mt-4">
+                    <h2>About this service</h2>
+
+                    <p>@description</p>
+
+                    <h3 class="mt-4">What's included</h3>
+
+                    <ul class="included-list">
+                        <li>
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Professional service from trained staff
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Service based on your selected requirements
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Convenient appointment scheduling
+                        </li>
+                        <li>
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Booking status tracking
+                        </li>
+                    </ul>
+
+                    <h3 class="mt-4">Before your service</h3>
+
+                    <p>
+                        Please provide accurate address details and select
+                        a suitable date and time while booking.
+                        Add any special instructions in the booking form.
+                    </p>
+                </div>
+
+                <div class="detail-section mt-4">
+                    <h2>Meet your professional</h2>
+
+                    <div class="provider-card">
+                        <div class="provider-avatar">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                        <div>
+                            <strong>HomeEase Professional</strong>
+                            <p class="mb-1">
+                                Staff assignment is managed by HomeEase.
+                            </p>
+                            <span class="provider-rating">
+                                <i class="bi bi-shield-check"></i>
+                                Professional service
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="col-lg-5">
+                <div class="booking-summary">
+
+                    <div class="d-flex align-items-start justify-content-between gap-3">
+                        <div>
+                            <span class="summary-label">
+                                Service price
+                            </span>
+
+                            <div class="summary-price">
+                                ₹@Model.Price.ToString("N2")
+                            </div>
+                        </div>
+
+                        <span class="summary-rating">
+                            <i class="bi bi-patch-check-fill"></i>
+                            Verified
+                        </span>
+                    </div>
+
+                    <p class="text-secondary small mt-2 mb-4">
+                        Final booking amount is based on the listed service price.
+                    </p>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-clock"></i>
+                        <div>
+                            <strong>Estimated duration</strong>
+                            <span>
+                                @(string.IsNullOrWhiteSpace(duration)
+                                    ? "To be confirmed"
+                                    : duration)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-shield-check"></i>
+                        <div>
+                            <strong>Professional service</strong>
+                            <span>
+                                Staff assignment is managed by the platform.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-calendar2-check"></i>
+                        <div>
+                            <strong>Flexible scheduling</strong>
+                            <span>
+                                Choose an available date and time in the next step.
+                            </span>
+                        </div>
+                    </div>
+
+                    @Html.ActionLink(
+     "Continue to booking",
+     "Create",
+     "Bookings",
+     new { serviceId = Model.ServiceId },
+     new { @class = "btn btn-brand btn-lg w-100 mt-4" }
+ )
+
+                    <p class="small text-secondary text-center mt-3 mb-0">
+                        <i class="bi bi-lock me-1"></i>
+                        Your booking is linked to your HomeEase account.
+                    </p>
+                </div>
+            </aside>
+
+        </div>
+
+        <div class="related-services mt-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2">
+                <div>
+                    <div class="eyebrow">MORE WAYS WE CAN HELP</div>
+                    <h2>Explore other services</h2>
+                </div>
+
+                @Html.ActionLink(
+                    "View all services",
+                    "Index",
+                    "Services",
+                    null,
+                    new { @class = "text-decoration-none fw-bold" }
+                )
+            </div>
+        </div>
+
+    </section>
+</main>

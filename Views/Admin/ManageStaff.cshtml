@@ -1,0 +1,87 @@
+﻿
+@model IEnumerable<HomeEase.Models.AdminStaffViewModel>
+
+@{
+    ViewBag.Title = "Manage Staff";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Manage Staff</h2>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="mb-3">
+        @Html.ActionLink(
+            "Add Staff",
+            "CreateStaff",
+            "Admin",
+            null,
+            new { @class = "btn btn-primary" })
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Skills</th>
+                    <th>Experience</th>
+                    <th>Availability</th>
+                    <th>Account</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var staff in Model)
+                    {
+                        <tr>
+                            <td>@staff.FullName</td>
+                            <td>@staff.Email</td>
+                            <td>@staff.Phone</td>
+                            <td>@staff.Skills</td>
+                            <td>@staff.ExperienceYears years</td>
+                            <td>
+                                @(staff.IsAvailable ? "Available" : "Unavailable")
+                            </td>
+                            <td>
+                                @(staff.IsActive ? "Active" : "Inactive")
+                            </td>
+                            <td>
+                                @Html.ActionLink(
+                                    "Edit",
+                                    "EditStaff",
+                                    "Admin",
+                                    new { id = staff.UserId },
+                                    new { @class = "btn btn-sm btn-primary" })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            No staff members found.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @Html.ActionLink(
+        "Back to Dashboard",
+        "Index",
+        "Admin",
+        null,
+        new { @class = "btn btn-outline-secondary" }
+    )
+</div>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<div class="container py-5">
+    <div class="mb-4">
+        <h2>Admin Dashboard</h2>
+        <p class="text-muted">
+            Welcome, @Session["FullName"].
+            Manage and monitor HomeEase from here.
+        </p>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-2">Total Customers</p>
+                    <h2>@(ViewBag.TotalCustomers ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-2">Active Services</p>
+                    <h2>@(ViewBag.TotalServices ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-2">Total Bookings</p>
+                    <h2>@(ViewBag.TotalBookings ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-2">Pending Bookings</p>
+                    <h2>@(ViewBag.PendingBookings ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Tools -->
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <h5>Admin Tools</h5>
+
+            <p class="text-muted">
+                Manage services and monitor your HomeEase platform.
+            </p>
+
+            @Html.ActionLink(
+                "Manage Services",
+                "ManageServices",
+                "Admin",
+                null,
+                new { @class = "btn btn-primary" })
+
+
+            @Html.ActionLink(
+                "Manage Bookings",
+                "ManageBookings",
+                "Admin",
+                null,
+                new { @class = "btn btn-outline-primary me-2" })
+
+            @Html.ActionLink(
+    "Manage Staff",
+    "ManageStaff",
+    "Admin",
+    null,
+    new { @class = "btn btn-outline-primary me-2" }
+)
+
+            @Html.ActionLink(
+    "Manage Payments",
+    "ManagePayments",
+    "Admin",
+    null,
+    new { @class = "btn btn-primary" })
+
+ 
+
+        </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="mt-4">
+        @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-outline-danger">
+                Logout
+            </button>
+        }
+    </div>
+</div>

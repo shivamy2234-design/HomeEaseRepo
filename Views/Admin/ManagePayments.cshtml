@@ -1,0 +1,148 @@
+﻿
+@model IEnumerable<HomeEase.Models.AdminPaymentViewModel>
+
+@{
+    ViewBag.Title = "Manage Payments";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Manage Payments</h2>
+            <p class="text-muted mb-0">
+                View customer payments and transaction records.
+            </p>
+        </div>
+
+        @Html.ActionLink(
+            "Back to Dashboard",
+            "Index",
+            "Admin",
+            null,
+            new { @class = "btn btn-outline-secondary" })
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Total Collected</p>
+                    <h3>₹@(((decimal?)ViewBag.TotalCollected ?? 0m).ToString("N2"))</h3>
+                    <small class="text-muted">Verified Paid records</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Successful Payments</p>
+                    <h3>@(ViewBag.PaidCount ?? 0)</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <p class="text-muted mb-1">Pending Payments</p>
+                    <h3>@(ViewBag.PendingCount ?? 0)</h3>
+                    <small class="text-muted">
+                        Failed: @(ViewBag.FailedCount ?? 0)
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Booking</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Status</th>
+                            <th>Transaction ID</th>
+                            <th>Paid At</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var payment in Model)
+                            {
+                                <tr>
+                                    <td>@payment.PaymentId</td>
+                                    <td>#@payment.BookingId</td>
+                                    <td>
+                                        <strong>@payment.CustomerName</strong>
+                                        <br />
+                                        <small class="text-muted">
+                                            @payment.CustomerEmail
+                                        </small>
+                                    </td>
+                                    <td>@payment.ServiceName</td>
+                                    <td>₹@payment.Amount.ToString("N2")</td>
+                                    <td>@payment.PaymentMethod</td>
+                                    <td>
+                                        @if (payment.PaymentStatus == "Paid")
+                                        {
+                                            <span class="badge bg-success">Paid</span>
+                                        }
+                                        else if (payment.PaymentStatus == "Pending")
+                                        {
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                @payment.PaymentStatus
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(payment.TransactionReference))
+                                        {
+                                            <span>@payment.TransactionReference</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @(payment.PaidAt.HasValue
+                                            ? payment.PaidAt.Value.ToString("dd MMM yyyy, hh:mm tt")
+                                            : "—")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center text-muted py-4">
+                                    No payment records found.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

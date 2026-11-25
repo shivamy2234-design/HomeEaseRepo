@@ -1,0 +1,151 @@
+﻿@using System.Collections.Generic
+@using System.Web.Mvc
+@model IEnumerable<HomeEase.Models.AdminBookingViewModel>
+
+@{
+    ViewBag.Title = "Manage Bookings";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Manage Bookings</h2>
+            <p class="text-muted">View customer bookings and update their status.</p>
+        </div>
+
+        @Html.ActionLink(
+            "Back to Dashboard",
+            "Index",
+            "Admin",
+            null,
+            new { @class = "btn btn-outline-secondary" })
+    </div>
+
+    @if (TempData["AdminMessage"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["AdminMessage"]
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-light border">
+            No bookings found yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Time Slot</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                        <th>Assigned Staff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model)
+                    {
+                        <tr>
+                            <td>@booking.BookingId</td>
+                            <td>
+                                <strong>@booking.CustomerName</strong><br />
+                                <small>@booking.CustomerEmail</small>
+                            </td>
+                            <td>@booking.ServiceName</td>
+                            <td>@booking.BookingDate.ToString("dd MMM yyyy")</td>
+                            <td>@booking.TimeSlot</td>
+                            <td>₹@booking.TotalAmount.ToString("0.00")</td>
+                            <td>
+                                <span class="badge bg-secondary">
+                                    @booking.Status
+                                </span>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm(
+                                    "UpdateBookingStatus",
+                                    "Admin",
+                                    new { id = booking.BookingId },
+                                    FormMethod.Post,
+                                    new { @class = "d-flex flex-column gap-2" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <select name="status"
+                                            class="form-select form-select-sm">
+                                        <option value="Pending"
+                                                @(booking.Status == "Pending" ? "selected" : "")>
+                                            Pending
+                                        </option>
+                                        <option value="Confirmed"
+                                                @(booking.Status == "Confirmed" ? "selected" : "")>
+                                            Confirmed
+                                        </option>
+                                        <option value="InProgress"
+                                                @(booking.Status == "InProgress" ? "selected" : "")>
+                                            In Progress
+                                        </option>
+                                        <option value="Completed"
+                                                @(booking.Status == "Completed" ? "selected" : "")>
+                                            Completed
+                                        </option>
+                                        <option value="Cancelled"
+                                                @(booking.Status == "Cancelled" ? "selected" : "")>
+                                            Cancelled
+                                        </option>
+                                    </select>
+
+                                    <button type="submit"
+                                            class="btn btn-primary btn-sm">
+                                        Update
+                                    </button>
+                                }
+                            </td>
+
+
+                            <td>
+                                <div class="small mb-2">
+                                    <strong>Current:</strong> @booking.AssignedStaffName
+                                </div>
+
+                                @using (Html.BeginForm(
+                                    "AssignStaff",
+                                    "Admin",
+                                    new { id = booking.BookingId },
+                                    FormMethod.Post,
+                                    new { @class = "d-flex flex-column gap-2" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.DropDownList(
+                                        "staffProfileId",
+                                        new SelectList(
+                                            (IEnumerable<SelectListItem>)ViewBag.AvailableStaff,
+                                            "Value",
+                                            "Text",
+                                            booking.StaffProfileId),
+                                        "-- Select staff --",
+                                        new { @class = "form-select form-select-sm" })
+
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        Assign Staff
+                                    </button>
+                                }
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

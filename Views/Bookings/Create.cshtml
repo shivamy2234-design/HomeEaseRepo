@@ -1,0 +1,278 @@
+﻿
+@model HomeEase.Models.BookingViewModel
+
+@{
+    ViewBag.Title = "Book a Service | HomeEase";
+    string selectedDate = Model.BookingDate.ToString("dd-MM-yyyy");
+}
+
+<main class="page-main">
+
+    <section class="page-hero">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Services", "Index", "Services")
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Book a service
+                    </li>
+                </ol>
+            </nav>
+
+            <div class="eyebrow">YOUR HOME, IN GOOD HANDS</div>
+            <h1>Schedule your service</h1>
+            <p class="page-intro">
+                Choose your preferred date, time and saved service address.
+            </p>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-lg-7">
+                <div class="form-panel">
+                    <h2>Booking details</h2>
+                    <p class="text-secondary">
+                        Fields marked * are required.
+                    </p>
+
+                    @using (Html.BeginForm(
+                        "Create",
+                        "Bookings",
+                        FormMethod.Post,
+                        new { @class = "booking-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.ServiceId)
+
+                        @Html.ValidationSummary(
+                            false,
+                            "",
+                            new { @class = "alert alert-danger" })
+
+                        <div class="mb-3">
+                            <label class="form-label">Selected service</label>
+
+                            @Html.TextBoxFor(
+                                m => m.ServiceName,
+                                new
+                                {
+                                    @class = "form-control",
+                                    @readonly = "readonly"
+                                })
+
+                            @Html.ValidationMessageFor(
+                                m => m.ServiceName,
+                                "",
+                                new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                @Html.LabelFor(
+                                    m => m.BookingDate,
+                                    "Preferred date *",
+                                    new { @class = "form-label" })
+
+                                @Html.TextBoxFor(
+                                    m => m.BookingDate,
+                                    "{0:yyyy-MM-dd}",
+                                    new
+                                    {
+                                        @class = "form-control",
+                                        type = "date",
+                                        id = "BookingDate",
+                                        min = DateTime.Today.ToString("yyyy-MM-dd"),
+                                        required = "required"
+                                    })
+
+                                @Html.ValidationMessageFor(
+                                    m => m.BookingDate,
+                                    "",
+                                    new { @class = "text-danger small" })
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.LabelFor(
+                                    m => m.TimeSlot,
+                                    "Time slot *",
+                                    new { @class = "form-label" })
+
+                                @Html.DropDownListFor(
+                                    m => m.TimeSlot,
+                                    (IEnumerable<SelectListItem>)ViewBag.TimeSlots,
+                                    "Choose a time",
+                                    new
+                                    {
+                                        @class = "form-select",
+                                        id = "TimeSlot",
+                                        required = "required"
+                                    })
+
+                                @Html.ValidationMessageFor(
+                                    m => m.TimeSlot,
+                                    "",
+                                    new { @class = "text-danger small" })
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            @Html.LabelFor(
+                                m => m.AddressId,
+                                "Service address *",
+                                new { @class = "form-label" })
+
+                            @Html.DropDownListFor(
+                                m => m.AddressId,
+                                (IEnumerable<SelectListItem>)ViewBag.Addresses,
+                                "Choose a saved address",
+                                new
+                                {
+                                    @class = "form-select",
+                                    required = "required"
+                                })
+
+                            @Html.ValidationMessageFor(
+                                m => m.AddressId,
+                                "",
+                                new { @class = "text-danger small" })
+
+                            <div class="form-text">
+                                Need another address?
+                                @Html.ActionLink(
+                                    "Manage your addresses",
+                                    "Addresses",
+                                    "Account")
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            @Html.LabelFor(
+                                m => m.SpecialInstructions,
+                                "Additional instructions (optional)",
+                                new { @class = "form-label" })
+
+                            @Html.TextAreaFor(
+                                m => m.SpecialInstructions,
+                                new
+                                {
+                                    @class = "form-control",
+                                    rows = "3",
+                                    maxlength = "500",
+                                    placeholder = "Tell us about your requirements"
+                                })
+
+                            @Html.ValidationMessageFor(
+                                m => m.SpecialInstructions,
+                                "",
+                                new { @class = "text-danger small" })
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-brand btn-lg w-100 mt-4">
+                            Confirm booking
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="booking-summary sticky-lg-top"
+                       style="top: 110px">
+
+                    <span class="summary-label">Booking summary</span>
+                    <h2 class="mt-2">@Model.ServiceName</h2>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-currency-rupee"></i>
+                        <div>
+                            <strong>Service price</strong>
+                            <span>₹@Model.TotalAmount.ToString("N2")</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-calendar-event"></i>
+                        <div>
+                            <strong>Preferred date</strong>
+                            <span id="summaryDate">@selectedDate</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-fact">
+                        <i class="bi bi-clock"></i>
+                        <div>
+                            <strong>Time slot</strong>
+                            <span id="summaryTimeSlot">
+                                @(string.IsNullOrWhiteSpace(Model.TimeSlot)
+                                ? "Select your preferred time"
+                                : Model.TimeSlot)
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <p class="small text-secondary mb-0">
+                        Your booking will be saved through HomeEase.
+                        Check the confirmation page for its status.
+                    </p>
+                </aside>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateInput = document.getElementById("BookingDate");
+            const timeInput = document.getElementById("TimeSlot");
+            const summaryDate = document.getElementById("summaryDate");
+            const summaryTime = document.getElementById("summaryTimeSlot");
+
+            // Date field update
+            if (dateInput instanceof HTMLInputElement &&
+                summaryDate instanceof HTMLElement) {
+
+                dateInput.addEventListener("change", function () {
+                    if (dateInput.value === "") {
+                        summaryDate.textContent = "Select your preferred date";
+                        return;
+                    }
+
+                    const parts = dateInput.value.split("-");
+
+                    if (parts.length === 3) {
+                        summaryDate.textContent =
+                            parts[2] + "-" + parts[1] + "-" + parts[0];
+                    }
+                });
+            }
+
+            // Time slot update
+            if (timeInput instanceof HTMLSelectElement &&
+                summaryTime instanceof HTMLElement) {
+
+                timeInput.addEventListener("change", function () {
+                    if (timeInput.selectedIndex <= 0) {
+                        summaryTime.textContent =
+                            "Select your preferred time";
+                        return;
+                    }
+
+                    summaryTime.textContent =
+                        timeInput.options[timeInput.selectedIndex].text;
+                });
+            }
+        });
+</script>
+

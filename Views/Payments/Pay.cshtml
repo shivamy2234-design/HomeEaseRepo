@@ -1,0 +1,110 @@
+﻿@model HomeEase.Models.PaymentViewModel
+
+@{
+    ViewBag.Title = "HomeEase Payment";
+    long amountInPaise = Convert.ToInt64(Model.Amount * 100m);
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <h2>Complete Your Payment</h2>
+                    <p class="text-muted">Review your booking before paying.</p>
+
+                    @if (TempData["PaymentError"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["PaymentError"]
+                        </div>
+                    }
+
+                    <hr />
+
+                    <p><strong>Booking ID:</strong> #@Model.BookingId</p>
+                    <p><strong>Service:</strong> @Model.ServiceName</p>
+                    <p>
+                        <strong>Date:</strong>
+                        @Model.BookingDate.ToString("dd MMM yyyy")
+                    </p>
+                    <p><strong>Time:</strong> @Model.TimeSlot</p>
+
+                    <div class="bg-light rounded p-3 my-4">
+                        <div class="d-flex justify-content-between">
+                            <strong>Total Amount</strong>
+                            <strong>₹@Model.Amount.ToString("N2")</strong>
+                        </div>
+                    </div>
+
+                    @if (string.IsNullOrWhiteSpace(Model.RazorpayOrderId))
+                    {
+                        using (Html.BeginForm(
+                            "StartPayment",
+                            "Payments",
+                            FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("bookingId", Model.BookingId)
+
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg w-100">
+                                Continue to Razorpay
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm(
+                            "VerifyPayment",
+                            "Payments",
+                            null,
+                            FormMethod.Post,
+                            new { id = "verifyPaymentForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("bookingId", Model.BookingId)
+
+                            @Html.Hidden(
+                                "razorpayOrderId",
+                                Model.RazorpayOrderId,
+                                new { id = "razorpayOrderId" })
+
+                            @Html.Hidden(
+                                "razorpayPaymentId",
+                                "",
+                                new { id = "razorpayPaymentId" })
+
+                            @Html.Hidden(
+                                "razorpaySignature",
+                                "",
+                                new { id = "razorpaySignature" })
+                        }
+
+                        <div id="razorpayCheckout"
+                             data-key="@Model.RazorpayKeyId"
+                             data-amount="@amountInPaise"
+                             data-service="@Model.ServiceName"
+                             data-order="@Model.RazorpayOrderId">
+
+                            <button type="button"
+                                    id="openRazorpay"
+                                    class="btn btn-success btn-lg w-100">
+                                Open Razorpay Checkout
+                            </button>
+                        </div>
+
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                        <script src="@Url.Content("~/Scripts/HomeEase/homeease-payment.js")"></script>
+                    }
+
+                    <p class="text-muted small mt-3 mb-0">
+                        Razorpay test mode. No real payment should be made.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

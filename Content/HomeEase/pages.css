@@ -1,0 +1,43 @@
+/* Shared styles for HomeEase's additional frontend pages */
+.inner-page { background: #fbfaf8; }
+.page-main { padding-top: 82px; min-height: 70vh; }
+.page-hero { padding: 38px 0 44px; background: linear-gradient(135deg, #f0f5f1 0%, #f9f7f1 100%); border-bottom: 1px solid #e7ebe6; }
+.page-hero h1 { font-family: "Manrope", sans-serif; font-weight: 800; letter-spacing: -.04em; font-size: clamp(2.2rem, 5vw, 3.5rem); margin: 12px 0; color: #1e3028; }
+.page-intro { color: #64736b; max-width: 720px; margin: 0; font-size: 1.05rem; }
+.breadcrumb { font-size: .9rem; margin-bottom: 26px; }
+.breadcrumb a { color: #237c57; text-decoration: none; }
+.detail-photo-wrap { position: relative; overflow: hidden; border-radius: 24px; min-height: 300px; background: #e9eee9; }
+.detail-photo { width: 100%; height: 420px; object-fit: cover; display: block; }
+.detail-photo-label { position: absolute; left: 18px; bottom: 18px; background: rgba(255,255,255,.95); color: #237c57; border-radius: 999px; padding: 10px 16px; font-weight: 700; font-size: .9rem; }
+.detail-section, .booking-summary, .form-panel { background: #fff; border: 1px solid #e8ece8; border-radius: 22px; padding: clamp(20px, 3vw, 30px); box-shadow: 0 12px 36px rgba(31,55,42,.045); }
+.detail-section h2, .form-panel h2 { font-family: "Manrope", sans-serif; font-weight: 800; color: #20362a; font-size: 1.45rem; }
+.detail-section h3 { font-family: "Manrope", sans-serif; font-weight: 800; font-size: 1.08rem; color: #20362a; }
+.detail-section p { color: #66736b; line-height: 1.8; }
+.included-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+.included-list li { display: flex; align-items: start; gap: 10px; color: #46554b; }
+.included-list i { color: #2b9668; margin-top: 3px; }
+.summary-label { font-size: .85rem; color: #6e7d73; font-weight: 700; }
+.summary-price { font-family: "Manrope", sans-serif; font-size: 2.4rem; line-height: 1.2; font-weight: 800; color: #20362a; }
+.summary-rating { background: #fff6db; color: #956800; border-radius: 10px; padding: 7px 10px; font-weight: 800; font-size: .9rem; white-space: nowrap; }
+.summary-fact { display: flex; gap: 13px; padding: 14px 0; border-top: 1px solid #edf0ed; }
+.summary-fact > i { color: #258356; font-size: 1.25rem; width: 24px; }
+.summary-fact div { display: grid; gap: 3px; }
+.summary-fact strong { color: #273b2e; font-size: .95rem; }
+.summary-fact span { color: #728076; font-size: .9rem; }
+.provider-card { display: flex; gap: 15px; align-items: start; margin-top: 18px; padding: 18px; background: #f7faf7; border-radius: 16px; }
+.provider-avatar { display: grid; place-items: center; flex: 0 0 54px; height: 54px; border-radius: 16px; background: #e1f1e7; color: #237c57; font-size: 1.7rem; }
+.provider-card strong { color: #263a2e; }
+.provider-card p { margin: 6px 0; font-size: .92rem; }
+.provider-rating { color: #a67800; font-size: .85rem; }
+.related-services h2 { font-family: "Manrope", sans-serif; font-weight: 800; color: #20362a; }
+.related-card { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 16px; border: 1px solid #e6ebe6; background: #fff; text-decoration: none; color: inherit; height: 100%; transition: transform .2s ease, box-shadow .2s ease; }
+.related-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(31,55,42,.08); }
+.related-card img { width: 68px; height: 68px; border-radius: 12px; object-fit: cover; }
+.related-card div { flex: 1; display: grid; gap: 4px; }
+.related-card strong { font-size: .95rem; color: #273b2e; }
+.related-card span { color: #728076; font-size: .85rem; }
+.related-card > i { color: #258356; }
+.form-panel .form-label { font-weight: 700; color: #314338; }
+.form-panel .form-control, .form-panel .form-select { border-color: #dce5dd; border-radius: 11px; padding: 11px 13px; }
+.form-panel .form-control:focus, .form-panel .form-select:focus { border-color: #2b9668; box-shadow: 0 0 0 .2rem rgba(43,150,104,.12); }
+@media (max-width: 767px) { .page-main { padding-top: 76px; } .detail-photo { height: 280px; } .page-hero { padding: 26px 0 32px; } }
